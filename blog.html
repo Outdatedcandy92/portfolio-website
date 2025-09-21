@@ -1,0 +1,105 @@
+---
+layout: default
+title: Blog
+permalink: /blog/
+---
+
+<style>
+  .blog-index {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: #333333;
+  }
+
+  .blog-posts {
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .post-item {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 2px solid #333333;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .post-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .post-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-title a {
+    color: #333333;
+    text-decoration: none;
+  }
+
+  .post-title a:hover {
+    text-decoration: underline;
+  }
+
+  .post-date {
+    color: #666666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-excerpt {
+    line-height: 1.6;
+    color: #333333;
+  }
+
+  @media (max-width: 768px) {
+    .blog-header h1 {
+      font-size: 2rem;
+    }
+    
+    .blog-index {
+      padding: 20px 15px;
+    }
+  }
+</style>
+
+<section class="blog-index">
+  <div class="blog-header">
+    <h1>Blog</h1>
+    <p>Thoughts on engineering, projects, and technology</p>
+  </div>
+
+  <div class="blog-posts">
+    {% for post in site.posts %}
+      <article class="post-item">
+        <h2 class="post-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
+        <div class="post-excerpt">
+          {{ post.excerpt | strip_html | truncatewords: 30 }}
+          <a href="{{ post.url | relative_url }}">Read more →</a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>

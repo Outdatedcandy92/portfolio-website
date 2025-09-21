@@ -1,0 +1,17 @@
+---
+---
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #FFFFE4;
+  color: #333333;  
+}
+
+body {
+  font-family: 'Merriweather';
+  line-height: 1.35;
+}
+
+

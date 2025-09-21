@@ -1,0 +1,246 @@
+---
+layout: default
+---
+<style>
+  .home {
+    height: 100vh; /* Ensure it takes the full viewport height */
+    width: 100vw; /* Ensure it takes the full viewport width */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers content vertically */
+  }
+
+  .hero-section {
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transform: translateY(-50px);
+  }
+
+  .home h1 {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 5px;
+  text-align: center;
+  }
+
+  .home h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .home p {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  /* Content links hover animation (github, linkedin, email, resume) */
+  .hero-section a {
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .hero-section a:hover {
+    transform: scale(1.15);
+    color: #f09244;
+  }
+
+  /* Blog section styles */
+  .blog-section {
+    height: 100%;
+    width: 100vw;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .blog-header h1 {
+    font-size: 40px;
+    font-weight: 900;
+    color: #333333;
+  }
+
+  .blog-posts {
+
+    max-width: 650px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* 2 columns */
+    gap: 0;  /* No gap between columns */
+    border-radius: 8px;  /* Optional: rounded corners */
+  }
+
+  .post-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;  /* Add more space between rows of posts */
+  }
+
+  .post-item:nth-child(odd) {
+    align-items: flex-start;  /* Left squares stick to left edge */
+  }
+
+  .post-item:nth-child(even) {
+    align-items: flex-end;    /* Right squares stick to right edge */
+  }
+
+  .post-square {
+    width: 280px;
+    height: 280px;  /* Explicit square dimensions */
+    border: 2px solid #333333;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;  /* Hide any image overflow */
+    position: relative;
+  }
+
+  .post-square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Scale image to fill square without distortion */
+    transition: transform 0.3s ease;
+  }
+
+  .post-square:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #f09244;
+  }
+
+  .post-square:hover img {
+    transform: scale(1.05);
+  }
+
+  .post-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    text-align: left;
+    width: 280px;  /* Match square width so text aligns properly */
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 280px;  /* Match square width */
+  }
+
+  .post-date {
+    font-size: 18px;
+    font-weight: 400;
+    color: #666666;
+    margin: 0;
+    white-space: nowrap;  /* Prevent text from wrapping to multiple lines */
+    flex-shrink: 0;       /* Prevent date from shrinking */
+  }
+
+  .post-title a {
+    color: #333333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .post-title a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #f09244;
+    transition: width 0.3s ease;
+  }
+
+  .post-title a:hover {
+    color: #f09244;
+    transform: translateX(3px);
+  }
+
+  .post-title a:hover::after {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .blog-header h1 {
+      font-size: 32px;
+    }
+    
+    .blog-section {
+      padding: 20px 15px;
+    }
+
+    .blog-posts {
+      grid-template-columns: 1fr;  /* Single column on mobile */
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 780px) {
+    .blog-posts {
+      grid-template-columns: 1fr;  /* Single column */
+      justify-items: center;  /* Center align the posts horizontally */
+      gap: 2rem;
+    }
+
+    .post-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;  /* Center align post content */
+    }
+  }
+
+  @media (max-width: 700px) {
+    .hero-section {
+      padding: 40px;  /* Add 20px padding inside hero section */
+    }
+  }
+</style>
+
+<section class="home">
+  <div class="hero-section">
+    {{ content }}
+  </div>
+</section>
+
+<section class="blog-section">
+  <div class="blog-header">
+    <h1>Projects</h1>
+  </div>
+
+  <div class="blog-posts">
+    {% for post in site.posts %}
+      <article class="post-item">
+        <a href="{{ post.url | relative_url }}">
+          <div class="post-square">
+            {% if post.image1 %}
+              <img src="{{ post.image1 | relative_url }}" alt="{{ post.title }}">
+            {% endif %}
+          </div>
+        </a>
+        <div class="post-meta">
+          <h2 class="post-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h2>
+          <span class="post-date">{{ post.date | date: "%Y" }}</span>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
