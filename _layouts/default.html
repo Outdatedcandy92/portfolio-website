@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light only">
     
     <title>
       {%- if page.title -%}
@@ -15,6 +16,23 @@
     </title>
     
     <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    
+    <style>
+      /* Prevent dark mode overrides globally */
+      :root {
+        color-scheme: light only;
+      }
+      
+      * {
+        color-scheme: light only;
+      }
+      
+      /* Force light background and text colors */
+      body, html {
+        background-color: #ffffff !important;
+        color: #333333 !important;
+      }
+    </style>
     
     <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">

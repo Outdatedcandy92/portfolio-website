@@ -2,6 +2,21 @@
 layout: default
 ---
 <style>
+  /* Prevent dark mode overrides */
+  :root {
+    color-scheme: light only;
+  }
+  
+  * {
+    color-scheme: light only;
+  }
+  
+  /* Force light background and text colors */
+  body, html {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+  }
+  
   .home {
     height: 100vh; /* Ensure it takes the full viewport height */
     width: 100vw; /* Ensure it takes the full viewport width */
